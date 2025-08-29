@@ -13,17 +13,6 @@ ansible-playbook -i hosts/prod/inventory playbook.yml --diff -e create_clusters=
 \#CHECK CLUSTERS - exmaple
 valkey-cli -h 192.168.0.1 -p 6390 -a pass cluster info
 
-uruchomienie test playbooka uruchamia 3 clustry po 3 nody na jendje maszynie virtualnej i tworzy 3 clustry na jednej virtualnej maszynie
-uruchomienie playbooka z inventory prod uruchamia po 2 nody na 3 virtualnych maszynach i tworzy rowniez 3 clustry ale rozdzielone na 3 cirtualnych maszynach skladajace sie kazdy cluster lacznie z 6 nodami towrzy to niezawdonosc kiedy jedna virutalna maszyna padnie dlatego task, ktory nazywa sie prod_create_clusters.yml uruchamia clustry z flagą "--cluster-replicas 1" bo 6 nodow dziala 3 mastery i 3 slave w jednym clustrze zapewniajac lepsza niezawdonosc a testy dziala po prostu jako 3 mastery dzialaajac po prostu szybciej niz jedne node
-
-przed wszystkim trzeba na maszynie docelowac zainstalowac valkey-tools - sudo apt install valkey-tools
-
-trzeba wymienic klucz ssh z docelowa maszyna by poszlo automatycznie albo do wykonywania
-ansible-playbook -i hosts/test/inventory playbook.yml --diff -e create_clusters=true
-dodac flage -kK i wpisywac haslo uzytkownika ktory ma sudo na maszynie i ten uzytkownik musi posiadac sudo bez koniecznosci wpisywania hasla
-
-haslo w group_vars/all/secret.yml najlepiej zaszyforowac ansible-vault przed uruchomieniem ansible sam podczas wykonywania odszyfruje sobie ten plik i wpisze haslo do clustrow
-
 ```markdown
 # Valkey Cluster Ansible Playbook
 
