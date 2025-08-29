@@ -39,7 +39,7 @@ valkey-cli -h 192.168.0.1 -p 6390 -a pass cluster info
 ## Prerequisites
 
 - `valkey-tools` must be installed on target machines:
-**sudo apt install valkey-tools**
+<code>sudo apt install valkey-tools</code>
 
 - Setup SSH key exchange with target machines for passwordless authentication to enable automatic execution.
 - Alternatively, when running playbook with password prompts use flags:
