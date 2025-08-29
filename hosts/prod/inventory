@@ -1,0 +1,7 @@
+[all]
+vm-prod1 ansible_host=192.168.0.1 ansible_user=admin
+vm-prod2 ansible_host=192.168.0.2 ansible_user=admin
+vm-prod3 ansible_host=192.168.0.3 ansible_user=admin
+
+[all:vars]
+envi=prod

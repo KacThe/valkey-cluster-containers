@@ -1,0 +1,37 @@
+---
+- name: Valkey
+  hosts: all
+  become: true
+  gather_facts: true
+
+  vars:
+    project_dir: /srv/{{ inventory_hostname }}
+    compose_file: "{{ inventory_dir }}/docker-compose.yaml"
+
+  tasks:
+    - name: Ensure /srv/valkey-cluster exists
+      file:
+        path: "{{ project_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Copy docker-compose.yaml
+      template:
+        src: "{{ inventory_dir }}/files/docker-compose.yaml.j2"
+        dest: "{{ project_dir }}/docker-compose.yaml"
+        mode: '0644'
+
+    - name: Stop and remove existing Valkey containers
+      command: docker compose down
+      args:
+        chdir: "{{ project_dir }}"
+      ignore_errors: true
+
+    - name: Start Valkey containers
+      command: docker compose up -d
+      args:
+        chdir: "{{ project_dir }}"
+
+    - name: Include cluster tasks
+      include_tasks: "tasks/{{ envi }}_create_clusters.yml"
+      when: create_clusters | default(false) 
