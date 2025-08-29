@@ -1,5 +1,5 @@
 [all]
-vm-test ansible_host=192.168.0.4 ansible_user=admin
+vm-test ansible_host=192.168.0.5 ansible_user=admin
 
 [all:vars]
 envi=test

@@ -3,7 +3,7 @@ version: '3.8'
 services:
   valkey1:
     image: valkey/valkey:8.1
-    container_name: valkey_session_redirect_url-1
+    container_name: valkey_cluster1-1
     ports:
       - "6380:6380"
       - "16380:16380"
@@ -29,7 +29,7 @@ services:
 
   valkey2:
     image: valkey/valkey:8.1
-    container_name: valkey_session_redirect_url-2
+    container_name: valkey_cluster1-2
     ports:
       - "6381:6381"
       - "16381:16381"
@@ -55,7 +55,7 @@ services:
 
   valkey3:
     image: valkey/valkey:8.1
-    container_name: valkey_session_url-1
+    container_name: valkey_cluster2-1
     ports:
       - "6390:6390"
       - "16390:16390"
@@ -81,7 +81,7 @@ services:
 
   valkey4:
     image: valkey/valkey:8.1
-    container_name: valkey_session_url-2
+    container_name: valkey_cluster2-2
     ports:
       - "6391:6391"
       - "16391:16391"
@@ -107,7 +107,7 @@ services:
 
   valkey5:
     image: valkey/valkey:8.1
-    container_name: valkey_search_url-1
+    container_name: valkey_cluster3-1
     ports:
       - "6370:6370"
       - "16370:16370"
@@ -133,7 +133,7 @@ services:
 
   valkey6:
     image: valkey/valkey:8.1
-    container_name: valkey_search_url-2
+    container_name: valkey_cluster3-2
     ports:
       - "6371:6371"
       - "16371:16371"
@@ -154,162 +154,6 @@ services:
         --cluster-announce-ip {{ ansible_host }}
         --cluster-require-full-coverage no
         --cluster-announce-port 6371
-    networks:
-      - valkey-net
-
-  valkey7:
-    image: valkey/valkey:8.1
-    container_name: valkey_product_url-1
-    ports:
-      - "6360:6360"
-      - "16360:16360"
-    environment:
-      VALKEY_EXTRA_FLAGS: >
-        --requirepass {{ valkey_password }}
-        --masterauth {{ valkey_password }}
-        --port 6360
-        --appendonly no
-        --save ''
-        --timeout 300
-        --io-threads-do-reads yes
-        --io-threads 1
-        --cluster-enabled yes
-        --cluster-config-file nodes.conf
-        --cluster-node-timeout 5000
-        --cluster-announce-bus-port 16360
-        --cluster-announce-ip {{ ansible_host }}
-        --cluster-require-full-coverage no
-        --cluster-announce-port 6360
-    networks:
-      - valkey-net
-
-  valkey8:
-    image: valkey/valkey:8.1
-    container_name: valkey_product_url-2
-    ports:
-      - "6361:6361"
-      - "16361:16361"
-    environment:
-      VALKEY_EXTRA_FLAGS: >
-        --requirepass {{ valkey_password }}
-        --masterauth {{ valkey_password }}
-        --port 6361
-        --appendonly no
-        --save ''
-        --timeout 300
-        --io-threads-do-reads yes
-        --io-threads 1
-        --cluster-enabled yes
-        --cluster-config-file nodes.conf
-        --cluster-node-timeout 5000
-        --cluster-announce-bus-port 16361
-        --cluster-announce-ip {{ ansible_host }}
-        --cluster-require-full-coverage no
-        --cluster-announce-port 6361
-    networks:
-      - valkey-net
-
-  valkey9:
-    image: valkey/valkey:8.1
-    container_name: valkey_default_url-1
-    ports:
-      - "6350:6350"
-      - "16350:16350"
-    environment:
-      VALKEY_EXTRA_FLAGS: >
-        --requirepass {{ valkey_password }}
-        --masterauth {{ valkey_password }}
-        --port 6350
-        --appendonly no
-        --save ''
-        --timeout 300
-        --io-threads-do-reads yes
-        --io-threads 2
-        --cluster-enabled yes
-        --cluster-config-file nodes.conf
-        --cluster-node-timeout 5000
-        --cluster-announce-bus-port 16350
-        --cluster-announce-ip {{ ansible_host }}
-        --cluster-require-full-coverage no
-        --cluster-announce-port 6350
-    networks:
-      - valkey-net
-
-  valkey10:
-    image: valkey/valkey:8.1
-    container_name: valkey_default_url-2
-    ports:
-      - "6351:6351"
-      - "16351:16351"
-    environment:
-      VALKEY_EXTRA_FLAGS: >
-        --requirepass {{ valkey_password }}
-        --masterauth {{ valkey_password }}
-        --port 6351
-        --appendonly no
-        --save ''
-        --timeout 300
-        --io-threads-do-reads yes
-        --io-threads 2
-        --cluster-enabled yes
-        --cluster-config-file nodes.conf
-        --cluster-node-timeout 5000
-        --cluster-announce-bus-port 16351
-        --cluster-announce-ip {{ ansible_host }}
-        --cluster-require-full-coverage no
-        --cluster-announce-port 6351
-    networks:
-      - valkey-net
-
-  valkey11:
-    image: valkey/valkey:8.1
-    container_name: valkey_content_url-1
-    ports:
-      - "6340:6340"
-      - "16340:16340"
-    environment:
-      VALKEY_EXTRA_FLAGS: >
-        --requirepass {{ valkey_password }}
-        --masterauth {{ valkey_password }}
-        --port 6340
-        --appendonly no
-        --save ''
-        --timeout 300
-        --io-threads-do-reads yes
-        --io-threads 2
-        --cluster-enabled yes
-        --cluster-config-file nodes.conf
-        --cluster-node-timeout 5000
-        --cluster-announce-bus-port 16340
-        --cluster-announce-ip {{ ansible_host }}
-        --cluster-require-full-coverage no
-        --cluster-announce-port 6340
-    networks:
-      - valkey-net
-
-  valkey12:
-    image: valkey/valkey:8.1
-    container_name: valkey_content_url-2
-    ports:
-      - "6341:6341"
-      - "16341:16341"
-    environment:
-      VALKEY_EXTRA_FLAGS: >
-        --requirepass {{ valkey_password }}
-        --masterauth {{ valkey_password }}
-        --port 6341
-        --appendonly no
-        --save ''
-        --timeout 300
-        --io-threads-do-reads yes
-        --io-threads 2
-        --cluster-enabled yes
-        --cluster-config-file nodes.conf
-        --cluster-node-timeout 5000
-        --cluster-announce-bus-port 16341
-        --cluster-announce-ip {{ ansible_host }}
-        --cluster-require-full-coverage no
-        --cluster-announce-port 6341
     networks:
       - valkey-net
 
