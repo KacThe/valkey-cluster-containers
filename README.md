@@ -1,7 +1,3 @@
-
-
-Uruchomienie playbooka powoduje restart valkeya, czyli utrate wszystkich danych!!!
-
 ansible-playbook -i hosts/test/inventory playbook.yml
 \#CREATE CLUSTERS
 ansible-playbook -i hosts/test/inventory playbook.yml --diff -e create_clusters=true
