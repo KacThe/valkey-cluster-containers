@@ -1,15 +1,3 @@
-ansible-playbook -i hosts/test/inventory playbook.yml
-\#CREATE CLUSTERS
-ansible-playbook -i hosts/test/inventory playbook.yml --diff -e create_clusters=true
-
-ansible-playbook -i hosts/prod/inventory playbook.yml
-\#CREATE CLUSTERS
-ansible-playbook -i hosts/prod/inventory playbook.yml --diff -e create_clusters=true
-
-\#CHECK CLUSTERS - exmaple
-valkey-cli -h 192.168.0.1 -p 6390 -a pass cluster info
-
-```markdown
 # Valkey Cluster Ansible Playbook
 
 > **Warning: Running the playbook restarts Valkey clusters and causes loss of all data!**
@@ -19,42 +7,23 @@ valkey-cli -h 192.168.0.1 -p 6390 -a pass cluster info
 ## Quick Start
 
 ### Run the playbook on test environment
-```
-
 ansible-playbook -i hosts/test/inventory playbook.yml
 
-```
-
 ### Create clusters on test environment
-```
-
 ansible-playbook -i hosts/test/inventory playbook.yml --diff -e create_clusters=true
 
-```
-
 ### Run the playbook on production environment
-```
-
 ansible-playbook -i hosts/prod/inventory playbook.yml
 
-```
-
 ### Create clusters on production environment
-```
-
 ansible-playbook -i hosts/prod/inventory playbook.yml --diff -e create_clusters=true
-
-```
 
 ---
 
 ## Checking Clusters Example
+
 You can check cluster status with Valkey CLI:
-```
-
 valkey-cli -h 192.168.0.1 -p 6390 -a pass cluster info
-
-```
 
 ---
 
@@ -70,19 +39,11 @@ valkey-cli -h 192.168.0.1 -p 6390 -a pass cluster info
 ## Prerequisites
 
 - `valkey-tools` must be installed on target machines:
-```
-
 sudo apt install valkey-tools
-
-```
 
 - Setup SSH key exchange with target machines for passwordless authentication to enable automatic execution.
 - Alternatively, when running playbook with password prompts use flags:
-```
-
 ansible-playbook -i hosts/test/inventory playbook.yml --diff -e create_clusters=true -kK
-
-```
   - Ensure the user has `sudo` access **without a password prompt** on the target machines.
 
 ---
@@ -91,11 +52,7 @@ ansible-playbook -i hosts/test/inventory playbook.yml --diff -e create_clusters=
 
 - Store the cluster password securely in `group_vars/all/secret.yml`.
 - It's **strongly recommended** to encrypt this file using Ansible Vault:
-```
-
 ansible-vault encrypt group_vars/all/secret.yml
-
-```
 - Ansible will automatically decrypt the file during playbook execution and supply the password to Valkey clusters.
 
 ---
@@ -109,4 +66,3 @@ ansible-vault encrypt group_vars/all/secret.yml
 ---
 
 Thank you for using this playbook to automate and manage your Valkey clusters efficiently!
-```
