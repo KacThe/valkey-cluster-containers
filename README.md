@@ -23,7 +23,7 @@ ansible-playbook -i hosts/prod/inventory playbook.yml --diff -e create_clusters=
 ## Checking Clusters Example
 
 You can check cluster status with Valkey CLI:
-<code>valkey-cli -h 192.168.0.1 -p 6390 -a pass cluster info<code>
+<code>valkey-cli -h 192.168.0.1 -p 6390 -a pass cluster info</code>
 
 ---
 
