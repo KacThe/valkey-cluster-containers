@@ -7,16 +7,16 @@
 ## Quick Start
 
 ### Run the playbook on test environment
-ansible-playbook -i hosts/test/inventory playbook.yml
+<code>ansible-playbook -i hosts/test/inventory playbook.yml</code>
 
 ### Create clusters on test environment
-ansible-playbook -i hosts/test/inventory playbook.yml --diff -e create_clusters=true
+<code>ansible-playbook -i hosts/test/inventory playbook.yml --diff -e create_clusters=true</code>
 
 ### Run the playbook on production environment
-ansible-playbook -i hosts/prod/inventory playbook.yml
+<code>ansible-playbook -i hosts/prod/inventory playbook.yml</code>
 
 ### Create clusters on production environment
-ansible-playbook -i hosts/prod/inventory playbook.yml --diff -e create_clusters=true
+<code>ansible-playbook -i hosts/prod/inventory playbook.yml --diff -e create_clusters=true</code>
 
 ---
 
